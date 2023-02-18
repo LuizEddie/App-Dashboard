@@ -21,5 +21,31 @@ $(document).ready(() => {
         });
     }); 
 
+    //ajax
+    $("#competencia").on('change', function(){
+        let valor  = $(this).val();
+
+        $.ajax({
+            type: 'GET',
+            url: 'app.php',
+            data: 'competencia='+valor,
+            dataType: 'json',
+            encode: true,
+            success: function(data){
+                $("#numeroVendas").text(data.numeroVendas);
+                $("#totalVendas").text(data.totalVendas);
+                $("#clientesAtivos").text(data.clientesAtivos);
+                $("#clientesInativos").text(data.clientesInativos);
+                $("#totalDespesas").text(data.totalDespesas);
+                $("#reclamacoes").text(data.criticas);
+                $("#sugestoes").text(data.sugestoes);
+                $("#elogios").text(data.elogios);
+            },
+            error: function(textStatus){
+                console.log(textStatus);
+            }
+        })
+
+    })
 
 })
